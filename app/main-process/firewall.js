@@ -3,6 +3,7 @@ const sudo = require('sudo-prompt');
 const { Clusters } = require('../models/clusters');
 const PingWrapper = require('./ping');
 const ServersService = require('../services/servers');
+const fs = require('fs');
 const Files = require('./util');
 const log = require('./log');
 
@@ -21,7 +22,8 @@ Firewall.prototype.exec = function (ipList) {
       break;
 
     case 'linux':
-      _execBash(`iptables -A INPUT -s ${multipleIp} -j DROP`, this._win);
+      console.log(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY iptables -A INPUT -s ${multipleIp} -j DROP -m comment --comment "CSGOSERVERPICKER"`);
+      _execBash(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY iptables -A INPUT -s ${multipleIp} -j DROP -m comment --comment "CSGOSERVERPICKER"`, this._win);
       break;
 
     case 'darwin':
@@ -40,24 +42,14 @@ Firewall.prototype.reset = function () {
       break;
 
     case 'linux':
-      let command = '';
-
-      this._clusters.clustersId.forEach(id => {
-
-        this._clusters.pops[id].relayAddresses.forEach(relayAddresse => {
-          this._clusters.pops[id].relayAddresses.splice(this._clusters.pops[id].relayAddresses.indexOf(relayAddresse), 1, relayAddresse.split(':')[0]);
-        });
-
-        this._clusters.pops[id].relayAddresses.forEach(addresse => {
-          command += `iptables -D INPUT -s ${addresse} -j DROP\n`;
-        });
-      });
-
-      command = `#!/bin/bash\n${command}`;
-
-      new Files().create(command);
-
-      _execBash(`sh ${app.getPath('home')}/csgo-mm-server-picker/ipRules.sh`, this._win);
+      //console.log(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getAppPath()}/app/main-process/reset_iptables.bash"`);
+      //let command = "#!/usr/bin/env bash\n";
+      //command += "iptables -S INPUT | awk '{if ($0 ~ /CSGOSERVERPICKER/){print (NR-1)}}' > iptables_ruleids.list\n";
+      //command += "RIDS=($(cat iptables_ruleids.list | sort -nr))\n";
+      //command += 'for RID in "${RIDS[@]}"\ndo\n  iptables -D INPUT $RID\ndone\nrm iptables_ruleids.list\n';
+      //_execBash(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getPath()}/app/main-process/reset_iptables.bash"`, this._win);
+      //fs.writeFile(`${app.getAppPath()}/reset_iptables.bash`, command, {mode: 0o750}, (err) => {if(err){console.log(err)}});
+      _execBash(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getAppPath()}/app/main-process/reset_iptables.bash"`, this._win);
       break;
 
     case 'darwin':

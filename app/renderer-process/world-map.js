@@ -1,8 +1,8 @@
 const { ipcRenderer } = require('electron');
 
-let ipList = [];
-let spanList = [];
-let isLoading = false;
+let ipList     = [];
+let spanList   = [];
+let isLoading  = false;
 const clusters = ['eu-west', 'eu-east', 'na-west', 'na-east', 'sa', 'oc', 'af', 'as'];
 
 // Mets à jour le ping sur les boutons

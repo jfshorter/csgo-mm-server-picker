@@ -34,8 +34,8 @@ csgoBtn.addEventListener('click', () => {
   shell.openExternal('steam://rungame/730/76561202255233023/');
 });
 
-let serversList = [];
-let ipListFiltered = [];
+let serversList          = [];
+let ipListFiltered       = [];
 let hostsListNotFiltered = [];
 
 ipcRenderer.on('add-specific-servers', (event, arg) => {
@@ -92,9 +92,10 @@ function resetListOfServers() {
   const span = document.getElementById('servers-list');
   span.innerHTML = ``;
 
-  serversList = [];
-  ipListFiltered = [];
+  serversList          = [];
+  ipListFiltered       = [];
   hostsListNotFiltered = [];
+  
 }
 
 function updateServerList(checked, id) {
