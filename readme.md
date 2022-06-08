@@ -67,3 +67,13 @@ To build and package :
 ```sh
 $ npm run dist
 ```
+
+## Yet another fork?! Why?!
+
+Because existing project is virtually dead, none of the core functionality bugs for linux are remotely being addressed.
+All of which have simple fixes, but Electron and JavaScript is completely the wrong solution for this and doesn't make life simple (Zero surprises there).
+Specifically the simplest solution to the reset functionality being broken, can be done trivially in BASH to solve the problem, but filesystem permissions get in the way and would be ugly to handle in JavaScript.
+
+Which rather begs the question again: Why?
+Once you have something semi-functional again you can destroy it and build it again. Properly.
+In a grown up language and without a minimum 80MB binary blob runtime footprint because you chose to be lazy with relying on Chromium as a crutch to solve all your windowing and UI problems.
