@@ -2,11 +2,12 @@ const Axios = require('axios');
 
 let ServersService = function () { }
 let serversList = null;
+let preferenceList = null;
 
 ServersService.prototype.getServersList = function () {
   if (serversList === null) {
     serversList = Axios({
-      url: `https://raw.githubusercontent.com/SteamDatabase/SteamTracking/master/Random/NetworkDatagramConfig.json`,
+      url: `https://api.steampowered.com/ISteamApps/GetSDRConfig/v1/?appid=730`,
       method: 'get'
     })
   }

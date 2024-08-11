@@ -65,6 +65,8 @@ clusters.forEach(id => {
     }
 
     ipcRenderer.send('add-cluster-in-ip-rules', [id, ipList]);
+
   });
+
 });
 

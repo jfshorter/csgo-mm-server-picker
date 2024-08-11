@@ -1,0 +1,8 @@
+{
+  "defaults": [
+    {"cluster": "eu-west", "server": "lhr"},
+    {"cluster": "eu-west", "server": "ams"},
+    {"cluster": "eu-west", "server": "par"},
+    {"cluster": "na-east", "server": "iad"}
+  ]
+}

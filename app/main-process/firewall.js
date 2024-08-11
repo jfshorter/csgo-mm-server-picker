@@ -3,8 +3,7 @@ const sudo = require('sudo-prompt');
 const { Clusters } = require('../models/clusters');
 const PingWrapper = require('./ping');
 const ServersService = require('../services/servers');
-const fs = require('fs');
-const Files = require('./util');
+//const fs = require('fs');
 const log = require('./log');
 
 let Firewall = function (win, clustersId, clusters) {
@@ -42,13 +41,13 @@ Firewall.prototype.reset = function () {
       break;
 
     case 'linux':
-      //console.log(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getAppPath()}/app/main-process/reset_iptables.bash"`);
       //let command = "#!/usr/bin/env bash\n";
       //command += "iptables -S INPUT | awk '{if ($0 ~ /CSGOSERVERPICKER/){print (NR-1)}}' > iptables_ruleids.list\n";
       //command += "RIDS=($(cat iptables_ruleids.list | sort -nr))\n";
       //command += 'for RID in "${RIDS[@]}"\ndo\n  iptables -D INPUT $RID\ndone\nrm iptables_ruleids.list\n';
-      //_execBash(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getPath()}/app/main-process/reset_iptables.bash"`, this._win);
       //fs.writeFile(`${app.getAppPath()}/reset_iptables.bash`, command, {mode: 0o750}, (err) => {if(err){console.log(err)}});
+      //_execBash(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getPath()}/app/main-process/reset_iptables.bash"`, this._win);
+      console.log(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getAppPath()}/app/main-process/reset_iptables.bash"`);
       _execBash(`pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY "${app.getAppPath()}/app/main-process/reset_iptables.bash"`, this._win);
       break;
 

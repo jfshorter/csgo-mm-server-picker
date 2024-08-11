@@ -47,6 +47,7 @@ ipcRenderer.on('add-specific-servers', (event, arg) => {
   let check = false;
   const spanServersList = document.getElementById('servers-list');
 
+
   hosts.forEach(host => {
     serversList.forEach(server => {
       if (server.cityName === host.cityName) {
@@ -78,6 +79,7 @@ ipcRenderer.on('add-specific-servers', (event, arg) => {
       checkbox.addEventListener('change', (e) => {
         updateServerList(e.target.checked, e.target.id);
       });
+
     }
 
     check = false;

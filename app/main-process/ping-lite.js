@@ -10,8 +10,12 @@ var spawn = require('child_process').spawn,
 module.exports = Ping;
 
 function Ping(host, options) {
+  this._i = 0;
+  this._bin = "echo";
+  this._args = ["Nothing to do"];
+  this._regmatch = /Nothing/;
   if (!host)
-    throw new Error('You must specify a host to ping!');
+    return this;
 
   this._host = host;
   this._options = options = (options || {});
